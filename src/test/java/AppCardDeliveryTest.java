@@ -1,5 +1,7 @@
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.Keys;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -18,8 +20,10 @@ public class AppCardDeliveryTest {
     void shouldBeSuccessfullyCompleted() {
         open("http://localhost:9999");
         String city = "Санкт-Петербург";
-        int defaultAddedDays = 3;
+        int defaultAddedDays = 10;
         $("[data-test-id='city'] input").setValue(city);
+        $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME));
+        $("[data-test-id='date'] input").sendKeys(Keys.DELETE);
         $("[data-test-id='date'] input").setValue(generateDate(defaultAddedDays, "dd.MM.yyyy"));
         $("[data-test-id='name'] input").setValue("Иванов Иван Иванович");
         $("[data-test-id='phone'] input").setValue("+78005553535");
